@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}FreshMart{% endblock %}</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head>
+<body><aside class="sidebar"><a class="brand" href="/"><span class="brandicon"><i class="fa-solid fa-leaf"></i></span><span><b>FreshMart</b><small>GROCERY MANAGEMENT</small></span></a>
+<p class="menutitle">MAIN MENU</p><a class="nav {% if request.endpoint=='dashboard' %}active{% endif %}" href="/"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+<a class="nav {% if request.endpoint in ['inventory','edit'] %}active{% endif %}" href="/inventory"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a>
+<a class="nav" href="/#add-product"><i class="fa-solid fa-circle-plus"></i> Add Product</a><a class="nav {% if request.endpoint=='billing' %}active{% endif %}" href="/billing"><i class="fa-solid fa-receipt"></i> Billing</a>
+<a class="nav {% if request.endpoint=='sales' %}active{% endif %}" href="/sales"><i class="fa-solid fa-chart-line"></i> Sales Report</a><div class="side-note"><i class="fa-solid fa-basket-shopping"></i><b>Fresh & simple</b><small>Manage your store in one place.</small></div></aside>
+<main class="main"><header class="topbar"><div><p class="eyebrow">GROCERY STORE WORKSPACE</p><h1>{% block heading %}Dashboard Overview{% endblock %}</h1><p class="subtitle">Manage your grocery store with confidence.</p></div><div class="admin"><span><i class="fa-solid fa-user"></i></span><div><b>Store Admin</b><small>Administrator</small></div></div></header>
+{% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}{% for cat,msg in messages %}<div class="flash {{cat}}">{{msg}}</div>{% endfor %}{% endif %}{% endwith %}
+{% block content %}{% endblock %}<footer>FreshMart Grocery Management System · Python Flask + SQLite</footer></main></body></html>
